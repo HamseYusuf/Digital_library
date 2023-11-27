@@ -1,0 +1,12 @@
+{% load tailwind_filters %}
+<h1>Create Category</h1>
+
+
+
+<form method="post">
+{% csrf_token %}
+{{ form|crispy }}
+<input type="submit" value="Create Category">
+</form>
+
+

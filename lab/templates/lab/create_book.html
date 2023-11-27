@@ -1,0 +1,16 @@
+{% extends 'lab/base.html' %}
+
+{% load tailwind_filters %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="max-w-lg mx-auto py-6 px-4 bg-white mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <div class="flex justify-center">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add Book
+        </button>
+    </div>
+</form>
+{% endblock content %}
