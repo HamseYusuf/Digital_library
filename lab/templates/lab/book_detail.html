@@ -1,26 +1,39 @@
 {% extends 'lab/base.html' %}
-
+{% block title %}
+    <title>Book | {{ book.title }}</title>
+{% endblock title %}
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <h2 class="text-4xl font-bold mb-4">{{ book.book_title | title }}</h2>
-    <div class="flex flex-col md:flex-row">
-        <img src="{{ book.cover_image.url }}" alt="Book Cover" class="w-full md:w-1/3 rounded-lg shadow-lg mb-4 md:mb-0">
-        <div class="md:pl-8">
-            <p class="text-gray-700 mb-2"><strong>Category:</strong> {{ book.category }}</p>
-            <p class="text-gray-700 mb-2"><strong>Author:</strong> {{ book.author }}</p>
-            <p class="text-gray-700 mb-2"><strong>Review:</strong> Lorem ipsum dolor sit amet consectetur.
-                Lorem ipsum dolor sit amet consectetur.
-                Lorem ipsum dolor sit amet consectetur.
-                Lorem ipsum dolor sit amet consectetur.
-                Lorem ipsum dolor sit amet consectetur.
-                Lorem ipsum dolor sit amet consectetur.
-            </p>
-            <p class="text-gray-700 mb-4"><strong>Publication Date:</strong> {{ book.publication_date }}</p>
-
-            <a href="{{ book.pdf_book.url }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
-                Download PDF
-            </a>
+    <div class="container mx-auto px-5">
+        <div class="flex flex-nowrap py-5 gap-12">
+            <div class="shrink-0 grow-0 w-1/3 max-h-[40rem] min-h-max items-center justify-center overflow-hidden">
+                <img class="w-full h-full"
+                     src="/media/{{ book.cover }}"
+                     alt="{{ book.title }}">
+            </div>
+            <div class="flex flex-col">
+                <strong class="font-bold text-stone-600 text-3xl mb-2">{{ book.title }}</strong>
+                <p class="text-lg font-semibold text-stone-400 ">{{ book.summary|capfirst }}</p>
+                <div class="flex flex-col py-4 text-stone-500 text-base font-semibold">
+                    <span>Publication date: <span class="font-semibold text-rose-700">{{ book.published_at }}</span></span>
+                    <span>File type: <span class="font-semibold text-rose-700">{{ book.src_file_type }}</span></span>
+                    <span>File size: <span class="font-semibold text-rose-700">{{ book.cover.size|filesizeformat }}</span></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="{% url 'download_book' book.id %}"
+                       class="py-1 px-3 bg-rose-500 self-start font-bold rounded-sm text-lg hover:bg-rose-500/80 cursor-pointer transition text-white">Download</a>
+                    <a class="py-1 px-3 bg-rose-500 self-start font-bold rounded-sm text-lg hover:bg-rose-500/80 cursor-pointer transition text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.5"
+                             stroke="currentColor"
+                             class="w-6 h-6 inline">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                        </svg>
+                        Add to collection
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
+{% endblock content %}
