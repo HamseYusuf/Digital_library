@@ -1,0 +1,18 @@
+<div class="bg-white pt-5 pb-4 border-b-2 border-rose-900/20 shadow-lg shadow-rose-100">
+    <div class="container mx-auto px-5 flex justify-between items-baseline">
+        <div>
+            <p class="text-xl font-bold text-rose-900">ATU Digital Library</p>
+        </div>
+        {% comment %} large screen nav {% endcomment %}
+        <div id="nav-row" class="hidden md:flex shrink flex-row flex-nowrap gap-5">
+            <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
+               href="{% url "book-list" %}">Home</a>
+            <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
+               href="{% url "book-list" %}">Categories</a>
+            <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
+               href="{% url "book-list" %}">My Collections</a>
+        </div>
+        {% comment %} small screen nav {% endcomment %}
+        <div id="nav-col" class="md:hidden flex-col"></div>
+    </div>
+</div>
