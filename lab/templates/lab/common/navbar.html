@@ -3,16 +3,30 @@
         <div>
             <p class="text-xl font-bold text-rose-900">ATU Digital Library</p>
         </div>
-        {% comment %} large screen nav {% endcomment %}
-        <div id="nav-row" class="hidden md:flex shrink flex-row flex-nowrap gap-5">
-            <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
-               href="{% url "book-list" %}">Home</a>
-            <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
-               href="{% url "book-list" %}">Categories</a>
-            <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
-               href="{% url "book-list" %}">My Collections</a>
+        <div class="self-stretch hidden lg:block">
+            <form action="{% url 'search' %}" class="h-full">
+                <input type="text"
+                       name="q"
+                       class="border-2 border-rose-700/40 w-64 h-full rounded-sm px-2"
+                       placeholder="Search...">
+            </form>
         </div>
-        {% comment %} small screen nav {% endcomment %}
-        <div id="nav-col" class="md:hidden flex-col"></div>
+        <div class="flex">
+            {% comment %} large screen nav {% endcomment %}
+            <div id="nav-row" class="hidden md:flex shrink flex-row flex-nowrap gap-5">
+                <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
+                   href="{% url 'home' %}">Home</a>
+                <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
+                   href="{% url 'home' %}">Categories</a>
+                <a class="font-bold text-lg text-rose-700 hover:text-rose-600 pb-1 px-1 border-b-2 border-white hover:border-rose-600 transition"
+                   href="{% url 'home' %}">My Collection</a>
+            </div>
+            <div class="ml-3">
+                <a class="font-bold text-lg bg-rose-500 hover:bg-rose-500/90 transition text-white py-1 rounded-sm pb-1 px-3"
+                   href="{% url 'logout' %}">Logout</a>
+            </div>
+            {% comment %} small screen nav {% endcomment %}
+            <div id="nav-col" class="md:hidden flex-col"></div>
+        </div>
     </div>
 </div>

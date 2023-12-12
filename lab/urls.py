@@ -1,10 +1,15 @@
 from django.urls import path
-from .views import home , create_book , create_category  , book_detail, download_book
+from django.contrib.auth.views import LogoutView
+from . import views
 
 urlpatterns = [
-    path('',home , name='book-list'),
-    path('create_category/', create_category, name='create_category'),
-    path('create_book/', create_book, name='create_book'),
-    path('book/<int:pk>/', book_detail, name='book_detail'),
-    path('book/download/<int:book>/', download_book, name='download_book')
+    path('',views.home , name='home'),
+    path('create_category/', views.create_category, name='create_category'),
+    path('create_book/', views.create_book, name='create_book'),
+    path('book/<int:pk>/', views.book_detail, name='book_detail'),
+    path('book/download/<int:book>/', views.download_book, name='download_book'),
+    path('search', views.search, name='search'),
+    path('login/', views.Login.as_view(), name='login'),
+    path('register/', views.Register.as_view(), name='register'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

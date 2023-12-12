@@ -1,21 +1,18 @@
 from django.shortcuts import render , redirect , get_object_or_404
-from django.http import HttpResponse
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic import FormView
+from django.http import FileResponse
 from .models import Book
-from .forms import CategoryForm, BookForm 
+from django.contrib.auth.models import User
+from .forms import CategoryForm, BookForm, RegisterForm
 from .models import Category, Book
 from.filters import  BookFilter
-import random
 import mimetypes
 
+@login_required()
 def home(request):
-    # categories = Category.objects.all()
-    # books = Book.objects.all()
-    # random_books_by_category = {cat:random.choice(books.filter(category = cat)) for cat in categories}
-
-    # context = {
-    #     "books": Book.objects.all()
-    # }
-
     books = Book.objects.all()
     
     context = {
@@ -24,19 +21,17 @@ def home(request):
 
     return render(request, 'lab/home.html', context)
 
+
+@login_required()
 def download_book(request, book):
-    try:
-        book = get_object_or_404(Book, id=book)
-        path = book.src_pdf.path
-        file = open(path, 'r')
-        filename = f"{book.title.replace(' ', '_')}.{book.src_file_type()}"
-        response = HttpResponse(file, content=mimetypes.guess_type(filename))
-        response['Content-Disposition'] = f"attachment; filename={filename}"
-        return response    
-    except:
-        return render(request, "lab/404.html")
+    book = get_object_or_404(Book, id=book)
+    path = book.file.path
+    file = open(path, 'rb')
+    response = FileResponse(file, as_attachment=True)
+    return response
     
 
+@login_required()
 def create_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -48,6 +43,8 @@ def create_category(request):
 
     return render(request, 'lab/create_category.html', {'form': form})
 
+
+@login_required()
 def create_book(request):
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
@@ -59,16 +56,39 @@ def create_book(request):
     return render(request, 'lab/create_book.html', {'form': form})
        
 
-# def home(request):
-#     book_filter = BookFilter(request.GET, queryset=Book.objects.all())
-#     books = book_filter.qs
-#     logo = Logo.objects.all()
-#     context = {
-#         'books': books,
-#         'logo': logo,
-#         'book_filter': book_filter,
-#     }
-#     return render(request, 'lab/list.html', context)
+class Login(LoginView):
+    template_name = "lab/login.html"
+    next_page = "home"
+
+
+class Register(FormView):
+    template_name = "lab/register.html"
+    form_class = RegisterForm
+
+    def get_success_url(self) -> str:
+        return reverse("home")
+
+    def form_valid(self, form: RegisterForm):
+        user = User.objects.create_user(form.data['username'], form.data['email'], form.data['password'])
+        return super().form_valid(form)
+    
+    
+
+
+class Logout(LogoutView):
+    template_name = ""
+
+
+def search(request):
+    q = request.GET.get("q")
+    books = Book.objects.filter(title__contains=q)
+    context = {
+        "books": books,
+        "q": q
+    }
+
+    return render(request, "lab/search.html", context)
+
 
 def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)

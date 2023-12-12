@@ -20,14 +20,14 @@ class Book(models.Model):
     summary = models.TextField(blank=True)
     published_at = models.DateField()
     cover = models.ImageField(upload_to='book_covers', max_length=200, blank=True)
-    src_pdf = models.FileField(upload_to='pdf_books', max_length=200, blank=True)
+    file = models.FileField(upload_to='pdf_books', max_length=200, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.author} - {self.title}"
     
     def src_file_type(self):
-        filename = self.src_pdf.name.split(".")
+        filename = self.file.name.split(".")
         return filename[-1]
 
 class Collection(models.Model):
