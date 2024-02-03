@@ -1,0 +1,100 @@
+
+{% extends 'lab/base.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="bg-blue-900 text-white py-20 px-4">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div class="md:w-1/2 mb-6 md:mb-0">
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">Welcome to Abaarso Tech University Digital Library</h1>
+        <p class="text-lg mb-6">Explore a vast collection of resources and expand your knowledge.</p>
+        <a href="{% url 'book-list'%}" class="bg-white text-blue-900 font-bold py-3 px-6 rounded-full hover:bg-blue-800 hover:text-white transition duration-300">Find Books </a>
+      </div>
+      <div class="md:w-1/2">
+        <img src="{% static '/images/b.jpg' %}" alt="Library Image" class="w-full rounded-lg shadow-lg rounded-tl-3xl rounded-br-3xl">
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-100">
+    <div class="container mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Key Features</h2>
+        <p class="text-lg text-gray-600">Discover what makes our digital library unique.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Extensive Collection</h3>
+          <p class="text-gray-600">Access thousands of books, articles, and resources covering various subjects.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">User-Friendly Interface</h3>
+          <p class="text-gray-600">Navigate through the library effortlessly with our intuitive interface.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Advanced Search</h3>
+          <p class="text-gray-600">Find exactly what you need quickly with our powerful search functionality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-gray-100">
+    <div class="container mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Library Statistics</h2>
+        <p class="text-lg text-gray-600">Explore key statistics about our digital library.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Statistic 1: Total Books -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Total Books</h3>
+          <p class="text-4xl font-bold text-blue-500">500+</p>
+          <p class="text-gray-600">Available in various categories</p>
+        </div>
+        
+        <!-- Statistic 2: Active Users -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Active Users</h3>
+          <p class="text-4xl font-bold text-blue-500">1000+</p>
+          <p class="text-gray-600">Engaging with our library</p>
+        </div>
+        
+        <!-- Statistic 3: Popular Categories -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Popular Categories</h3>
+          <ul class="text-gray-600 text-lg">
+            <li class="mb-2">Technology</li>
+            <li class="mb-2">Science</li>
+          </ul>
+          <p class="text-gray-600 mt-4">And many more...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="py-20 bg-gray-100">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <!-- Image -->
+      <div class="md:w-1/2 mb-6 md:mb-0">
+        <img src="{% static 'images/c.jpeg' %}" alt="Abaarso Tech University" class="w-full rounded-lg shadow-lg">
+      </div>
+      <!-- Text Content -->
+      <div class="md:w-1/2 md:pl-10"> <!-- Added padding to the left side for spacing -->
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Abaarso Tech University</h2>
+        <p class="text-lg text-gray-600 mb-6">Abaarso Tech University is a leading institution in Somaliland, dedicated to providing high-quality education and fostering innovation in technology and entrepreneurship.</p>
+        <ul class="text-gray-700">
+          <li class="mb-2"><span class="font-bold">Mission:</span> Empowering the next generation of leaders through education and innovation.</li>
+          <li class="mb-2"><span class="font-bold">Vision:</span> To be a catalyst for positive change and economic development in Somalia and beyond.</li>
+          <li class="mb-2"><span class="font-bold">Achievements:</span> ATU has produced graduates who have gone on to prestigious universities and successful careers globally.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  
+
+
+{% endblock content %}
