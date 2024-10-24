@@ -1,15 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login , logout
+from django.contrib.auth import authenticate, login , logout 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from .models import Book, Logo , Video
+from .forms import BookSearchForm
+
+
+def video(request):
+    videos = Video.objects.all()
+    context = {
+        'videos' : videos
+    }
+    return render(request , 'lab/video.html' , context)
+
+
+
 
 def custom_logout(request):
     logout(request)
-    return redirect('home')  
+    return redirect('home') 
 
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-from .models import Book, Logo
-from .forms import BookSearchForm
 
 
 def home(request):

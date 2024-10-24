@@ -30,6 +30,17 @@ class Book(models.Model):
     cover_image = models.ImageField(upload_to='book_covers', max_length=200, blank=True, null=True)
     pdf_book = models.FileField(upload_to='pdf_books', max_length=200, blank=True, null=True)
 
+
+
+class Video(models.Model):
+    title = models.CharField(max_length=200)
+    Video = models.FileField(upload_to='videos')
+
+    def __str__(self):
+        return self.title
+
+
+
 class School(models.Model):
     school_name = models.CharField(max_length=50, null=True)
 
